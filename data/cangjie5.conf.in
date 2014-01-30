@@ -1,0 +1,10 @@
+[YaTableConfig]
+Enable=True
+id=cangjie5
+DisplayName=倉頡五代
+Priority=2
+LangCode=zh_TW
+Database=cangjie5
+CodeAllmatch=False
+PhraseCodeNoempty=False
+PhraseCodeUseonce=True

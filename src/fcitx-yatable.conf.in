@@ -1,0 +1,14 @@
+[Addon]
+Name=fcitx-yatable
+GeneralName=YaTable
+GeneralName[zh_CN]=另一个码表
+GeneralName[zh_TW]=另一個碼表
+Comment=Yet Another Table Input Method For Fcitx
+Comment[zh_CN]=另一个Fcitx码表输入法
+Comment[zh_TW]=另一個Fcitx碼表輸入法
+Category=InputMethod
+Enabled=True
+Library=fcitx-yatable.so
+Type=SharedLibrary
+SubConfig=Table:configfile:yatable/*.conf:yatable.desc,fcitx:domain
+IMRegisterMethod=Self

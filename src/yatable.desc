@@ -1,0 +1,39 @@
+[YaTableConfig/Enable]
+Description=Enable
+Type=Boolean
+DefaultValue=True
+
+[YaTableConfig/id]
+Description=ID for IM
+Type=String
+
+[YaTableConfig/DisplayName]
+Description=DisplayName for IM
+Type=String
+
+[YaTableConfig/Priority]
+Description=Order for IM
+Type=Integer
+
+[YaTableConfig/LangCode]
+Description=Language Code for IM
+Type=String
+
+[YaTableConfig/Database]
+Description=Database filename
+Type=File
+
+[YaTableConfig/CodeAllmatch]
+Description=Get matched item only
+Type=Boolean
+
+[YaTableConfig/PhraseCodeNoempty]
+Description=PhraseCode length equal code length
+Type=Boolean
+
+[YaTableConfig/PhraseCodeUseonce]
+Description=Every code useonce in PhraseCode
+Type=Boolean
+
+[DescriptionFile]
+LocaleDomain=fcitx
