@@ -242,11 +242,10 @@ INPUT_RETURN_VALUE FcitxYaTableIMGetCandWords(void* arg)
     FcitxInputState* input = FcitxInstanceGetInputState(yatable->owner);
     FcitxInstanceCleanInputWindow(yatable->owner);
     FcitxMessages* preedit = FcitxInputStateGetPreedit(input);
-    FcitxMessages* clientpreedit = FcitxInputStateGetClientPreedit(input);
+    FcitxMessages* cliedit = FcitxInputStateGetClientPreedit(input);
+    boolean bcliedit = FcitxInstanceICSupportPreedit(yatable->owner,
+                       FcitxInstanceGetCurrentIC(yatable->owner));
 
-    FcitxMessages* msg = FcitxInstanceICSupportPreedit(yatable->owner,
-                         FcitxInstanceGetCurrentIC(yatable->owner)) ?
-                         clientpreedit : preedit;
     FcitxInputStateSetShowCursor(input, true);
 
     char* commitstr = api->commitgetcommitstr(sid);
@@ -257,19 +256,21 @@ INPUT_RETURN_VALUE FcitxYaTableIMGetCandWords(void* arg)
     size_t inputlen = 0;
     inputlen += (commitstr == NULL? 0:strlen(commitstr));
     inputlen += (prevstr == NULL? 0:strlen(prevstr));
-    FcitxMessagesAddMessageAtLast(msg, MSG_TIPS, "%s",
+
+    if(bcliedit) {
+        FcitxMessagesAddMessageAtLast(cliedit, MSG_TIPS, "%s",
+                                      commitstr == NULL? "":commitstr);
+        FcitxInputStateSetClientCursorPos(input, inputlen);
+    }
+    FcitxMessagesAddMessageAtLast(preedit, MSG_TIPS, "%s",
                                   commitstr == NULL? "":commitstr);
-    FcitxMessagesAddMessageAtLast(msg, MSG_INPUT, "%s%s",
+    FcitxInputStateSetCursorPos(input, inputlen);
+    FcitxMessagesAddMessageAtLast(preedit, MSG_INPUT, "%s%s",
                                   prevstr == NULL? "":prevstr,
                                   nextstr == NULL? "":nextstr);
 
     if((aliasstr != NULL) && (*aliasstr != '\0')) {
-        FcitxMessagesAddMessageAtLast(msg, MSG_CODE, "·%s", aliasstr);
-    }
-    if(msg == preedit) {
-        FcitxInputStateSetCursorPos(input, inputlen);
-    } else {
-        FcitxInputStateSetClientCursorPos(input, inputlen);
+        FcitxMessagesAddMessageAtLast(preedit, MSG_CODE, "·%s", aliasstr);
     }
 
     if(context != NULL) {
@@ -278,6 +279,11 @@ INPUT_RETURN_VALUE FcitxYaTableIMGetCandWords(void* arg)
         if(cand == NULL) return IRV_DISPLAY_CANDWORDS;
 
         do {
+            if(bcliedit && cand->selected) {
+                FcitxMessagesAddMessageAtLast(cliedit, MSG_OTHER, "%s",
+                                              cand->candword);
+            }
+
             FcitxCandidateWord candword = {0};
 
             char* compstr = NULL;
