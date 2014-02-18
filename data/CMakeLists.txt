@@ -1,7 +1,6 @@
 SET(SQLITE_BIN sqlite3)
 SET(YATABLEDATAFILES "cangjie5" "wubi86")
-SET(SHAREDIR "share/fcitx")
-
+SET(SHAREDIR "${FCITX4_PREFIX}/share/fcitx")
 
 FOREACH(DATAFILE ${YATABLEDATAFILES})
     fcitx_translate_add_apply_source(
