@@ -8,6 +8,7 @@ CONFIG_BINDING_REGISTER("YaTableConfig", "Priority", YaTableIndex);
 CONFIG_BINDING_REGISTER("YaTableConfig", "LangCode", LangCode);
 CONFIG_BINDING_REGISTER("YaTableConfig", "Database", userdata);
 CONFIG_BINDING_REGISTER("YaTableConfig", "CodeAllmatch", CodeAllmatch);
+CONFIG_BINDING_REGISTER("YaTableConfig", "CodeMaxAllmatch", CodeMaxAllmatch);
 CONFIG_BINDING_REGISTER("YaTableConfig", "PhraseCodeNoempty",
                         PhraseCodeNoempty);
 CONFIG_BINDING_REGISTER("YaTableConfig", "PhraseCodeUseonce",

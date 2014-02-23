@@ -6,5 +6,6 @@ Priority=3
 LangCode=zh_CN
 Database=wubi86
 CodeAllmatch=False
+CodeMaxAllmatch=1
 PhraseCodeNoempty=False
 PhraseCodeUseonce=True
