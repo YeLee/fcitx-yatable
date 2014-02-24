@@ -58,8 +58,8 @@ static void* FcitxYaTableCreate(FcitxInstance* instance)
         api->configsetint(prev->sid, "YaTableIndex",
                           cfgprev->info.YaTableIndex);
         api->configsetstring(prev->sid, "LangCode", cfgprev->info.LangCode);
-        api->configsetbool(prev->sid, "CodeAllmatch",
-                           cfgprev->info.CodeAllmatch);
+        api->configsetint(prev->sid, "CodeMaxAllmatch",
+                           cfgprev->info.CodeMaxAllmatch);
         api->configsetbool(prev->sid, "PhraseCodeNoempty",
                            cfgprev->info.PhraseCodeNoempty);
         api->configsetbool(prev->sid, "PhraseCodeUseonce",

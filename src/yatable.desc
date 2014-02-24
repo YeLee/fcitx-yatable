@@ -23,10 +23,6 @@ Type=String
 Description=Database filename
 Type=File
 
-[YaTableConfig/CodeAllmatch]
-Description=Get matched item only
-Type=Boolean
-
 [YaTableConfig/CodeMaxAllmatch]
 Description=Get matched item only when code length too short
 Type=Integer
