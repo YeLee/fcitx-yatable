@@ -35,12 +35,34 @@ static void* FcitxYaTableCreate(FcitxInstance* instance)
     fcitx_utils_free(pkgdir);
     FcitxYaTable* head = NULL,* cur = NULL,* prev = NULL;
     FcitxYaTableInfo* cfghead = FcitxYaTableGetAllCFG();
-    FcitxYaTableInfo* cfgcur = cfghead,* cfgprev= NULL;
+    FcitxYaTableInfo* cfgcur = cfghead;
 
     while(cfgcur != NULL) {
+        char* userdb = NULL;
+        fcitx_utils_alloc_cat_str(userdb, yatableuserdir,
+                                  cfgcur->info.userdata);
+        YaTableConfig yatablecfg = api->configopen(userdb);
+        if(yatablecfg != NULL) {
+            api->configsetbool(yatablecfg, "Enable", cfgcur->info.Enable);
+            api->configsetstring(yatablecfg, "id", cfgcur->info.id);
+            api->configsetstring(yatablecfg, "DisplayName",
+                                 cfgcur->info.DisplayName);
+            api->configsetint(yatablecfg, "YaTableIndex",
+                              cfgcur->info.YaTableIndex);
+            api->configsetstring(yatablecfg, "LangCode",
+                                 cfgcur->info.LangCode);
+            api->configsetint(yatablecfg, "CodeMaxAllmatch",
+                              cfgcur->info.CodeMaxAllmatch);
+            api->configsetbool(yatablecfg, "PhraseCodeNoempty",
+                               cfgcur->info.PhraseCodeNoempty);
+            api->configsetbool(yatablecfg, "PhraseCodeUseonce",
+                               cfgcur->info.PhraseCodeUseonce);
+            api->configclose(yatablecfg);
+        }
+        fcitx_utils_free(userdb);
+
         cur = FcitxYaTableStartSession(yatablesharedir, yatableuserdir,
                                        cfgcur->info.userdata, api, instance);
-        cfgprev = cfgcur;
         cfgcur = cfgcur->next;
         if(cur == NULL) continue;
         cur->next = NULL;
@@ -51,19 +73,6 @@ static void* FcitxYaTableCreate(FcitxInstance* instance)
         }
         prev = cur;
 
-        api->configsetbool(prev->sid, "Enable", cfgprev->info.Enable);
-        api->configsetstring(prev->sid, "id", cfgprev->info.id);
-        api->configsetstring(prev->sid, "DisplayName",
-                             cfgprev->info.DisplayName);
-        api->configsetint(prev->sid, "YaTableIndex",
-                          cfgprev->info.YaTableIndex);
-        api->configsetstring(prev->sid, "LangCode", cfgprev->info.LangCode);
-        api->configsetint(prev->sid, "CodeMaxAllmatch",
-                           cfgprev->info.CodeMaxAllmatch);
-        api->configsetbool(prev->sid, "PhraseCodeNoempty",
-                           cfgprev->info.PhraseCodeNoempty);
-        api->configsetbool(prev->sid, "PhraseCodeUseonce",
-                           cfgprev->info.PhraseCodeUseonce);
     }
     FcitxYaTableFreeAllCFG(cfghead);
 
