@@ -135,6 +135,10 @@ static INPUT_RETURN_VALUE FcitxYaTableIMDoInputReal(void* arg, FcitxKeySym sym,
         break;
     case KEY_EVENT_COMMIT_RAW:
         commitstr = api->keygetcommitstrbykeyevent(sid, event);
+    case KEY_EVENT_COMMIT_SELECTED:
+        if(event == KEY_EVENT_COMMIT_SELECTED) {
+            commitstr = api->commitgetcommitstr(sid);
+        }
         FcitxInputContext* ic = FcitxInstanceGetCurrentIC(yatable->owner);
         FcitxInstanceCommitString(yatable->owner, ic, commitstr);
     case KEY_EVENT_COMMIT_CLEAR:

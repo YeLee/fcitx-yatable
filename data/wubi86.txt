@@ -50,6 +50,7 @@ INSERT INTO "otherkeys" VALUES('KeyBackSpace',65288,0);
 INSERT INTO "otherkeys" VALUES('KeyCommitRaw',65293,0);
 INSERT INTO "otherkeys" VALUES('KeyCommitCurrent',32,0);
 INSERT INTO "otherkeys" VALUES('KeyCommitClear',65307,0);
+INSERT INTO "otherkeys" VALUES('KeyCommitSelected',65293,4);
 INSERT INTO "otherkeys" VALUES('KeyMoveBackward',65361,0);
 INSERT INTO "otherkeys" VALUES('KeyMoveForward',65363,0);
 INSERT INTO "otherkeys" VALUES('KeyPrevPage',45,0);
