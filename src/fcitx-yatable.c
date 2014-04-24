@@ -38,6 +38,11 @@ static void* FcitxYaTableCreate(FcitxInstance* instance)
     FcitxYaTableInfo* cfgcur = cfghead;
 
     while(cfgcur != NULL) {
+        if(cfgcur->info.Enable == false) {
+            cfgcur = cfgcur->next;
+            continue;
+        }
+
         char* userdb = NULL;
         fcitx_utils_alloc_cat_str(userdb, yatableuserdir,
                                   cfgcur->info.userdata);
