@@ -59,6 +59,7 @@ INSERT INTO "otherkeys" VALUES('KeyPrevWord',65362,0);
 INSERT INTO "otherkeys" VALUES('KeyNextWord',65364,0);
 INSERT INTO "otherkeys" VALUES('KeyHome',65360,0);
 INSERT INTO "otherkeys" VALUES('KeyEnd',65367,0);
+INSERT INTO "otherkeys" VALUES('KeyRemoveUserPhrase',65535,4);
 CREATE TABLE [Data]([code] char, [text] char, [stem] char, [weight] real, [type] int);
 INSERT INTO "Data" VALUES('a','工','aa',99454797.0,0);
 INSERT INTO "Data" VALUES('b','了','bn',1477224452.0,0);

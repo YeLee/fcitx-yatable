@@ -211,6 +211,13 @@ static INPUT_RETURN_VALUE FcitxYaTableIMDoInputReal(void* arg, FcitxKeySym sym,
     case KEY_EVENT_CAND_NEXT:
         api->contextselectnext(context);
         break;
+    case KEY_EVENT_REMOVE_USER_PHRASE:
+        if(context != NULL) {
+            api->removephrase(yatable->context);
+            api->contextcleancontext(yatable->context);
+            yatable->context = NULL;
+        }
+        break;
     }
 
     return IRV_DISPLAY_CANDWORDS;
